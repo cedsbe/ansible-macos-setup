@@ -1,0 +1,8 @@
+.ansible/
+.task/
+.vault_password
+*.retry
+*.pyc
+__pycache__/
+.env
+.DS_Store

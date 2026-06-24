@@ -1,0 +1,10 @@
+---
+- name: Symlink dotfiles
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/{{ item.key }}"
+    dest: "{{ item.value }}"
+    state: link
+    force: true
+  loop: "{{ dotfiles_map | dict2items }}"
+  loop_control:
+    label: "{{ item.key }} -> {{ item.value }}"

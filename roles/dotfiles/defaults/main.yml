@@ -1,0 +1,6 @@
+---
+# Map of source files (relative to this role's files/) to destination paths
+dotfiles_map: {}
+#  .zshrc: "{{ user_home }}/.zshrc"
+#  .vimrc: "{{ user_home }}/.vimrc"
+#  .gitignore_global: "{{ user_home }}/.gitignore_global"

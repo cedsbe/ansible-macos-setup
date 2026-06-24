@@ -1,0 +1,10 @@
+---
+# Encrypt this file with: ansible-vault encrypt group_vars/all/vault.yml
+#
+# Add sensitive variables here, prefixed with "vault_" to make it clear
+# they originate from the vault. Reference them in vars.yml like:
+#   git_user_email: "{{ vault_git_user_email }}"
+
+# vault_git_user_name: "Your Name"
+# vault_git_user_email: "you@example.com"
+# vault_ssh_key_passphrase: "your-passphrase"

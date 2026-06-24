@@ -1,0 +1,20 @@
+---
+- name: Ensure Homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ homebrew_taps }}"
+
+- name: Ensure Homebrew formulae
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ homebrew_formulae }}"
+
+- name: Ensure Homebrew casks
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+    install_options:
+      - "appdir=/Applications"
+  loop: "{{ homebrew_casks }}"

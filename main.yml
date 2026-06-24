@@ -1,0 +1,12 @@
+---
+- name: Configure macOS
+  hosts: localhost
+  roles:
+    - { role: homebrew, tags: ["homebrew"] }
+    - { role: mas, tags: ["mas"] }
+    - { role: git, tags: ["git"] }
+    - { role: ssh, tags: ["ssh"] }
+    - { role: shell, tags: ["shell"] }
+    - { role: macos_defaults, tags: ["macos_defaults", "defaults"] }
+    - { role: dock, tags: ["dock"] }
+    - { role: dotfiles, tags: ["dotfiles"] }

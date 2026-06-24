@@ -1,0 +1,30 @@
+---
+- name: Ensure .ssh directory exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.ssh"
+    state: directory
+    mode: "0700"
+
+- name: Verify SSH passphrase is set
+  ansible.builtin.assert:
+    that:
+      - vault_ssh_key_passphrase is defined
+      - vault_ssh_key_passphrase | length > 0
+    fail_msg: "Set vault_ssh_key_passphrase in group_vars/all/vault.yml"
+
+- name: Generate SSH key
+  community.crypto.openssh_keypair:
+    path: "{{ user_home }}/.ssh/{{ ssh_key_filename }}"
+    type: "{{ ssh_key_type }}"
+    comment: "{{ ssh_key_comment }}"
+    passphrase: "{{ ssh_key_passphrase }}"
+    mode: "0600"
+  register: ssh_key
+  notify: Display new SSH public key
+
+- name: Deploy SSH config
+  ansible.builtin.template:
+    src: config.j2
+    dest: "{{ user_home }}/.ssh/config"
+    mode: "0600"
+    backup: true

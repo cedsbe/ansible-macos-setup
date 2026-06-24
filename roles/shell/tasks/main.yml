@@ -1,0 +1,42 @@
+---
+- name: Ensure fish is installed
+  community.general.homebrew:
+    name: fish
+    state: present
+
+- name: Ensure starship is installed
+  community.general.homebrew:
+    name: starship
+    state: present
+
+- name: Add fish to allowed shells
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    line: "{{ shell_fish_path }}"
+  become: true
+
+- name: Set fish as default shell
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    shell: "{{ shell_fish_path }}"
+  become: true
+
+- name: Ensure fish config directory exists
+  ansible.builtin.file:
+    path: "{{ user_home }}/.config/fish"
+    state: directory
+    mode: "0755"
+
+- name: Deploy starship configuration
+  ansible.builtin.copy:
+    src: starship.toml
+    dest: "{{ user_home }}/.config/starship.toml"
+    mode: "0644"
+    backup: true
+
+- name: Ensure starship init is in fish config
+  ansible.builtin.lineinfile:
+    path: "{{ user_home }}/.config/fish/config.fish"
+    line: "starship init fish | source"
+    create: true
+    mode: "0644"

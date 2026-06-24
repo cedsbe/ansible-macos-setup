@@ -1,0 +1,129 @@
+---
+- name: Set computer name
+  ansible.builtin.command:
+    cmd: "scutil --set {{ item }} '{{ macos_defaults_computername }}'"
+  loop:
+    - ComputerName
+    - HostName
+    - LocalHostName
+  become: true
+  changed_when: false
+
+# Finder
+- name: Show filename extensions in Finder
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: Show hidden files in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: AppleShowAllFiles
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: Show path bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: Show status bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+  notify: Restart Finder
+
+- name: Use list view by default in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: "Nlsv"
+  notify: Restart Finder
+
+- name: Disable warning when changing file extension
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+  notify: Restart Finder
+
+# Keyboard
+- name: Set fast key repeat rate
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 2
+
+- name: Set short initial key repeat delay
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 15
+
+# Trackpad
+- name: Enable tap to click
+  community.general.osx_defaults:
+    domain: com.apple.AppleMultitouchTrackpad
+    key: Clicking
+    type: int
+    value: 1
+
+# Screenshots
+- name: Create screenshots directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/Screenshots"
+    state: directory
+    mode: "0755"
+
+- name: Save screenshots to ~/Screenshots
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: "{{ user_home }}/Screenshots"
+  notify: Restart SystemUIServer
+
+- name: Save screenshots as PNG
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: type
+    type: string
+    value: "png"
+  notify: Restart SystemUIServer
+
+# Mission Control
+- name: Do not automatically rearrange Spaces
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: mru-spaces
+    type: bool
+    value: false
+
+# Safari
+- name: Enable Safari develop menu
+  community.general.osx_defaults:
+    domain: com.apple.Safari
+    key: IncludeDevelopMenu
+    type: bool
+    value: true
+
+# Activity Monitor
+- name: Show all processes in Activity Monitor
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: ShowCategory
+    type: int
+    value: 0

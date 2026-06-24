@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/{{ ssh_key_filename }}

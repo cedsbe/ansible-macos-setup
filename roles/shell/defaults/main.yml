@@ -1,0 +1,2 @@
+---
+shell_fish_path: "{{ '/opt/homebrew' if ansible_machine == 'arm64' else '/usr/local' }}/bin/fish"

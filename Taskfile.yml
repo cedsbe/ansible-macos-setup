@@ -1,0 +1,77 @@
+version: "3"
+
+tasks:
+  default:
+    desc: Run the full playbook
+    cmds:
+      - task: run
+
+  bootstrap:
+    desc: First-time setup — install Ansible via Homebrew, then run the playbook
+    preconditions:
+      - sh: which brew
+        msg: "Install Homebrew first: https://brew.sh"
+    cmds:
+      - brew install ansible
+      - task: setup
+      - task: vault:init
+      - task: run
+
+  setup:
+    desc: Install required Ansible collections and pre-commit hooks
+    cmds:
+      - ansible-galaxy collection install -r requirements.yml
+      - pre-commit install
+
+  run:
+    desc: Run the full playbook
+    aliases: [r]
+    cmds:
+      - ansible-playbook main.yml
+
+  tags:
+    desc: "Run specific tags (e.g., task tags -- homebrew,git)"
+    cmds:
+      - ansible-playbook main.yml --tags "{{.CLI_ARGS}}"
+
+  vault:init:
+    desc: Create vault password file and encrypt the vault
+    prompt: This will overwrite any existing .vault_password file. Continue?
+    cmds:
+      - cmd: |
+          printf "Enter vault password: " && read -s VAULT_PASS && echo "$VAULT_PASS" > .vault_password && echo
+        silent: true
+      - ansible-vault encrypt group_vars/all/vault.yml
+
+  vault:encrypt:
+    desc: Encrypt the vault file
+    cmds:
+      - ansible-vault encrypt group_vars/all/vault.yml
+
+  vault:decrypt:
+    desc: Decrypt the vault file
+    cmds:
+      - ansible-vault decrypt group_vars/all/vault.yml
+
+  vault:edit:
+    desc: Edit the encrypted vault file
+    cmds:
+      - ansible-vault edit group_vars/all/vault.yml
+
+  update:
+    desc: Update Homebrew and upgrade all packages
+    cmds:
+      - brew update
+      - brew upgrade
+      - brew upgrade --cask --greedy
+      - brew cleanup
+
+  lint:
+    desc: Lint with ansible-lint
+    cmds:
+      - ansible-lint main.yml
+
+  spellcheck:
+    desc: Run cspell spell checking
+    cmds:
+      - cspell "**/*"

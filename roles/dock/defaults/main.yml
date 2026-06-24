@@ -1,0 +1,6 @@
+---
+dock_apps: []
+dock_icon_size: 48
+dock_autohide: true
+dock_minimize_to_application: true
+dock_show_recents: false

@@ -1,0 +1,59 @@
+---
+# User configuration
+user_name: "{{ ansible_user_id }}"
+user_home: "{{ ansible_env.HOME }}"
+
+# Homebrew
+homebrew_taps: []
+
+homebrew_formulae: []
+#  - git
+#  - jq
+#  - ripgrep
+#  - fd
+#  - fzf
+#  - tmux
+#  - neovim
+
+homebrew_casks: []
+#  - firefox
+#  - iterm2
+#  - visual-studio-code
+#  - rectangle
+#  - 1password
+
+# Mac App Store (requires `mas` formula)
+mas_apps: {}
+#  497799835: "Xcode"
+#  1475897767: "Drafts"
+
+mas_email: ""
+mas_signin_dialog: false
+
+# macOS Defaults
+macos_defaults_computername: "MacBook-Pro"
+
+# Dock
+dock_apps: []
+#  - /Applications/Safari.app
+#  - /System/Applications/Mail.app
+#  - /Applications/iTerm.app
+
+dock_icon_size: 48
+dock_autohide: true
+dock_minimize_to_application: true
+dock_show_recents: false
+
+# Git
+git_user_name: ""
+git_user_email: ""
+git_default_branch: "main"
+git_editor: "vim"
+
+# SSH
+ssh_key_type: "ed25519"
+ssh_key_comment: "{{ git_user_email }}"
+ssh_key_filename: "id_ed25519"
+
+# Shell
+shell_fish_path: "{{ '/opt/homebrew' if ansible_machine == 'arm64' else '/usr/local' }}/bin/fish"

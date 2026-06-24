@@ -1,0 +1,15 @@
+---
+- name: Ensure mas is installed
+  community.general.homebrew:
+    name: mas
+    state: present
+
+- name: Install Mac App Store apps
+  ansible.builtin.command:
+    cmd: "mas install {{ item.key }}"
+  loop: "{{ mas_apps | dict2items }}"
+  loop_control:
+    label: "{{ item.value }} ({{ item.key }})"
+  register: mas_result
+  changed_when: "'already installed' not in mas_result.stdout"
+  failed_when: mas_result.rc != 0 and 'already installed' not in mas_result.stdout
