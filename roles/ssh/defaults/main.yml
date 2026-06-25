@@ -1,5 +1,3 @@
 ---
-ssh_key_type: "ed25519"
-ssh_key_comment: "{{ git_user_email }}"
-ssh_key_filename: "id_ed25519"
-ssh_key_passphrase: "{{ vault_ssh_key_passphrase }}"
+# SSH is configured to use 1Password SSH agent
+# No key generation settings needed

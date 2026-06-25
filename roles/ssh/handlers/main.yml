@@ -1,4 +1,2 @@
 ---
-- name: Display new SSH public key
-  ansible.builtin.debug:
-    msg: "New SSH public key: {{ ssh_key.public_key }}"
+# No handlers needed for 1Password SSH agent setup

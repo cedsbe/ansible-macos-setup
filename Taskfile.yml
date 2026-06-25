@@ -7,15 +7,15 @@ tasks:
       - task: run
 
   bootstrap:
-    desc: First-time setup — install Ansible via Homebrew, then run the playbook
+    desc: First-time setup
     preconditions:
       - sh: which brew
         msg: "Install Homebrew first: https://brew.sh"
     cmds:
       - brew install ansible
+      - brew install pre-commit
       - task: setup
       - task: vault:init
-      - task: run
 
   setup:
     desc: Install required Ansible collections and pre-commit hooks
@@ -27,12 +27,18 @@ tasks:
     desc: Run the full playbook
     aliases: [r]
     cmds:
-      - ansible-playbook main.yml
+      - ansible-playbook main.yml --ask-become-pass
+
+  dry-run:
+    desc: Show what would change without making changes
+    aliases: [dr]
+    cmds:
+      - ansible-playbook main.yml --check --diff --ask-become-pass
 
   tags:
     desc: "Run specific tags (e.g., task tags -- homebrew,git)"
     cmds:
-      - ansible-playbook main.yml --tags "{{.CLI_ARGS}}"
+      - ansible-playbook main.yml --tags "{{.CLI_ARGS}}" --ask-become-pass
 
   vault:init:
     desc: Create vault password file and encrypt the vault

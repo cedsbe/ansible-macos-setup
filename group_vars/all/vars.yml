@@ -1,37 +1,61 @@
 ---
 # User configuration
-user_name: "{{ ansible_user_id }}"
-user_home: "{{ ansible_env.HOME }}"
+user_name: "{{ ansible_facts['user_id'] }}"
+user_home: "{{ ansible_facts['env']['HOME'] }}"
 
 # Homebrew
 homebrew_taps: []
 
-homebrew_formulae: []
-#  - git
-#  - jq
-#  - ripgrep
-#  - fd
-#  - fzf
-#  - tmux
-#  - neovim
+homebrew_formulae:
+  - ansible
+  - bat
+  - fd
+  - fish
+  - fzf
+  - gh
+  - git
+  - go-task
+  - htop
+  - jq
+  - pre-commit
+  - ripgrep
+  - starship
+  - tldr
+  - tree
+  - wget
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
 
-homebrew_casks: []
-#  - firefox
-#  - iterm2
-#  - visual-studio-code
-#  - rectangle
-#  - 1password
+homebrew_casks:
+  - 1password
+  - claude
+  - claude-code
+  - docker-desktop
+  - font-fira-code-nerd-font
+  - ghostty
+  - google-drive
+  - grammarly-desktop
+  - monitorcontrol
+  - mos
+  - onedrive
+  - raycast
+  - rectangle
+  - signal
+  - slack
+  - spotify
+  - the-unarchiver
+  - vivaldi
+  - visual-studio-code
+
 
 # Mac App Store (requires `mas` formula)
 mas_apps: {}
-#  497799835: "Xcode"
-#  1475897767: "Drafts"
 
 mas_email: ""
 mas_signin_dialog: false
 
 # macOS Defaults
-macos_defaults_computername: "MacBook-Pro"
+macos_defaults_computername: "Cedrics-MacBook-Pro"
 
 # Dock
 dock_apps: []
@@ -45,15 +69,12 @@ dock_minimize_to_application: true
 dock_show_recents: false
 
 # Git
-git_user_name: ""
-git_user_email: ""
+git_user_name: "Cedric GHIOT"
+git_user_email: "8707686+cedsbe@users.noreply.github.com"
 git_default_branch: "main"
 git_editor: "vim"
 
-# SSH
-ssh_key_type: "ed25519"
-ssh_key_comment: "{{ git_user_email }}"
-ssh_key_filename: "id_ed25519"
+# SSH (managed by 1Password agent)
 
 # Shell
-shell_fish_path: "{{ '/opt/homebrew' if ansible_machine == 'arm64' else '/usr/local' }}/bin/fish"
+shell_fish_path: "{{ '/opt/homebrew' if ansible_facts['machine'] == 'arm64' else '/usr/local' }}/bin/fish"
