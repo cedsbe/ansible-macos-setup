@@ -112,14 +112,6 @@
     type: bool
     value: false
 
-# Safari
-- name: Enable Safari develop menu
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: IncludeDevelopMenu
-    type: bool
-    value: true
-
 # Activity Monitor
 - name: Show all processes in Activity Monitor
   community.general.osx_defaults:
