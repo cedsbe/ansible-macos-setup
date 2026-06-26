@@ -63,8 +63,8 @@ dock_apps: []
 #  - /System/Applications/Mail.app
 #  - /Applications/iTerm.app
 
-dock_icon_size: 48
-dock_autohide: true
+dock_icon_size: 32
+dock_autohide: false
 dock_minimize_to_application: true
 dock_show_recents: false
 
