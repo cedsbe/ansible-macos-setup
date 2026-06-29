@@ -5,6 +5,7 @@
     state: present
 
 - name: Install Mac App Store apps
+  become: true
   ansible.builtin.command:
     cmd: "mas install {{ item.key }}"
   loop: "{{ mas_apps | dict2items }}"

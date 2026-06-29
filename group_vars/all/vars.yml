@@ -50,7 +50,8 @@ homebrew_casks:
 
 
 # Mac App Store (requires `mas` formula)
-mas_apps: {}
+mas_apps:
+  1295203466: "Windows App"
 
 mas_email: ""
 mas_signin_dialog: false
