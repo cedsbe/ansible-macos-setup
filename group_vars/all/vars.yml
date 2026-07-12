@@ -54,6 +54,7 @@ homebrew_casks:
 mas_apps:
   1295203466: "Windows App"
   1193539993: "Brother iPrint&Scan"
+  310633997: "WhatsApp Messenger"
 
 mas_email: ""
 mas_signin_dialog: false
