@@ -37,6 +37,7 @@ homebrew_casks:
   - ghostty
   - google-drive
   - grammarly-desktop
+  - headlamp
   - monitorcontrol
   - mos
   - onedrive
@@ -44,6 +45,7 @@ homebrew_casks:
   - rectangle
   - signal
   - slack
+  - soundsource
   - spotify
   - the-unarchiver
   - vivaldi
