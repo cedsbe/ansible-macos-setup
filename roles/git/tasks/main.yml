@@ -36,3 +36,9 @@
     name: pull.rebase
     scope: global
     value: "true"
+
+- name: Set auto setup remote to always
+  community.general.git_config:
+    name: push.autoSetupRemote
+    scope: global
+    value: "true"

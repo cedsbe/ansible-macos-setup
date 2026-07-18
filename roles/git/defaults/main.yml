@@ -2,4 +2,4 @@
 git_user_name: ""
 git_user_email: ""
 git_default_branch: "main"
-git_editor: "vim"
+git_editor: "code --wait"
