@@ -47,6 +47,7 @@ homebrew_casks:
   - slack
   - soundsource
   - spotify
+  - steam
   - the-unarchiver
   - vivaldi
   - visual-studio-code
