@@ -40,3 +40,10 @@
     line: "starship init fish | source"
     create: true
     mode: "0644"
+
+- name: Ensure GitHub token is set in fish config
+  ansible.builtin.lineinfile:
+    path: "{{ user_home }}/.config/fish/conf.d/tokens.fish"
+    line: "set -x GITHUB_TOKEN (gh auth token)"
+    create: true
+    mode: "0644"
